@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#08141a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Ветер между мирами — визуальная новелла</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="icon" href="assets/icons/icon-192.png" type="image/png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="bg-root" aria-hidden="true">
+    <div class="bg-layer" id="bgA"></div>
+    <div class="bg-layer" id="bgB"></div>
+  </div>
+  <div id="particles" aria-hidden="true"></div>
+  <div id="grain" aria-hidden="true"></div>
+
+  <header id="hud" class="hidden">
+    <div class="hud-left">
+      <span id="hud-chapter"></span>
+      <span id="hud-sparks" class="hud-sparks"></span>
+    </div>
+    <nav class="hud-right" aria-label="Управление">
+      <button id="btn-log" class="hud-btn" type="button" aria-label="Журнал" title="Журнал">
+        <svg class="hud-ico" viewBox="0 0 18 18" aria-hidden="true"><path d="M4 5h10M4 9h10M4 13h6"/></svg><span class="hud-label">Журнал</span>
+      </button>
+      <button id="btn-auto" class="hud-btn" type="button" aria-pressed="false" aria-label="Авто" title="Авто">
+        <svg class="hud-ico" viewBox="0 0 18 18" aria-hidden="true"><path d="M6.5 4.5l7 4.5-7 4.5z" fill="currentColor"/></svg><span class="hud-label">Авто</span>
+      </button>
+      <button id="btn-sound" class="hud-btn" type="button" aria-pressed="true" aria-label="Звук" title="Звук">
+        <svg class="hud-ico" viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 7v4h3l4 3V4l-4 3h-3z" fill="currentColor"/><path d="M13 6.5a4 4 0 010 5M14.8 4.7a6.5 6.5 0 010 8.6"/></svg><span class="hud-label">Звук</span>
+      </button>
+      <button id="btn-voice" class="hud-btn" type="button" aria-pressed="false" aria-label="Голос" title="Голос">
+        <svg class="hud-ico" viewBox="0 0 18 18" aria-hidden="true"><rect x="7" y="2.5" width="4" height="7.5" rx="2" fill="currentColor"/><path d="M4.8 9a4.2 4.2 0 008.4 0M9 13.2V16"/></svg><span class="hud-label">Голос</span>
+      </button>
+      <button id="btn-menu" class="hud-btn" type="button" aria-label="Меню" title="Меню">
+        <svg class="hud-ico" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="4" r="1.5" fill="currentColor"/><circle cx="9" cy="9" r="1.5" fill="currentColor"/><circle cx="9" cy="14" r="1.5" fill="currentColor"/></svg><span class="hud-label">Меню</span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="stage" class="hidden">
+    <div id="char-layer" aria-hidden="true">
+      <div class="char-slot" id="slot-0"></div>
+      <div class="char-slot" id="slot-1"></div>
+    </div>
+    <div id="vision-frame" aria-hidden="true">
+      <img src="assets/bg/final-frame.webp" alt="" draggable="false">
+    </div>
+    <div id="dialogue" class="dialogue" role="button" tabindex="0" aria-label="Продолжить диалог">
+      <div id="speaker-wrap"><span id="speaker"></span><span id="speaker-source"></span></div>
+      <p id="text"></p>
+      <div id="advance" aria-hidden="true"><span></span></div>
+    </div>
+  </main>
+
+  <div id="choices" class="choices hidden" role="group" aria-label="Выбор"></div>
+
+  <div id="chapter-card" class="chapter-card" aria-hidden="true">
+    <div class="cc-inner">
+      <div class="cc-rule"></div>
+      <div id="cc-num" class="cc-num"></div>
+      <h2 id="cc-title" class="cc-title"></h2>
+      <p id="cc-source" class="cc-source"></p>
+      <div class="cc-rule"></div>
+    </div>
+  </div>
+
+  <div id="spark-flash" class="spark-flash" aria-hidden="true">
+    <div class="spark-core"></div>
+    <div class="spark-ring r1"></div>
+    <div class="spark-ring r2"></div>
+    <div class="spark-ring r3"></div>
+    <p id="spark-label" class="spark-label"></p>
+  </div>
+</div>
+
+<!-- ================= ТИТУЛЬНЫЙ ЭКРАН ================= -->
+<section id="title-screen" class="screen active">
+  <div id="title-bg" class="title-bg" aria-hidden="true"></div>
+  <div class="title-shade" aria-hidden="true"></div>
+  <div class="title-content">
+    <p class="title-kicker">Неофициальная фанатская история</p>
+    <h1 class="title-main">Ветер<br><em>между мирами</em></h1>
+    <p class="title-sub">интерактивная одиссея по мирам Хаяо Миядзаки</p>
+    <div class="title-menu">
+      <button id="btn-start" class="menu-btn primary" type="button">
+        <span class="mb-num">01</span><span>Новая история</span>
+      </button>
+      <button id="btn-continue" class="menu-btn" type="button">
+        <span class="mb-num">02</span><span>Продолжить</span>
+      </button>
+      <button id="btn-atlas" class="menu-btn" type="button">
+        <span class="mb-num">03</span><span>Атлас миров</span>
+      </button>
+      <button id="btn-about" class="menu-btn" type="button">
+        <span class="mb-num">04</span><span>Об игре</span>
+      </button>
+    </div>
+    <p id="title-progress" class="title-progress"></p>
+  </div>
+  <div class="title-footer">
+    <span>13 жизней · 5 концовок · один сон</span>
+    <span>фанатский проект · все вселенные принадлежат их создателям</span>
+  </div>
+</section>
+
+<!-- ================= ЭКРАН КОНЦОВКИ ================= -->
+<section id="ending-screen" class="screen">
+  <div id="ending-bg" class="ending-bg" aria-hidden="true"></div>
+  <div class="ending-shade" aria-hidden="true"></div>
+  <button id="btn-ending-exit" class="ending-exit" type="button">← В меню</button>
+  <div class="ending-content">
+    <p class="ending-kicker">История завершена</p>
+    <h2 id="ending-title" class="ending-title"></h2>
+    <div id="ending-text" class="ending-text"></div>
+    <p id="ending-quote" class="ending-quote"></p>
+    <div class="ending-stats" id="ending-stats"></div>
+    <div class="ending-actions">
+      <button id="btn-ending-again" class="menu-btn primary" type="button">Сыграть снова</button>
+      <button id="btn-ending-atlas" class="menu-btn" type="button">Атлас миров</button>
+      <button id="btn-ending-title" class="menu-btn" type="button">В главное меню</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= МОДАЛЬНЫЕ ОКНА ================= -->
+<div id="log-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Журнал">
+  <div class="modal-card log-card">
+    <div class="modal-head">
+      <h3>Журнал ветра</h3>
+      <button class="icon-btn" data-close="log-modal" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <div id="log-list" class="log-list"></div>
+  </div>
+</div>
+
+<div id="atlas-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Атлас миров">
+  <div class="modal-card atlas-card">
+    <div class="modal-head">
+      <h3>Атлас миров</h3>
+      <button class="icon-btn" data-close="atlas-modal" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <p class="modal-note">Миры, которые ты уже прожил. Каждая история — дверь в чужое небо.</p>
+    <div id="atlas-grid" class="atlas-grid"></div>
+    <h4 class="atlas-subhead">Эхо ранних работ</h4>
+    <div id="atlas-echo" class="atlas-echo"></div>
+  </div>
+</div>
+
+<div id="about-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Об игре">
+  <div class="modal-card about-card">
+    <div class="modal-head">
+      <h3>Об игре</h3>
+      <button class="icon-btn" data-close="about-modal" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="about-body">
+      <p><strong>«Ветер между мирами»</strong> — неофициальная фанатская визуальная новелла. Старик засыпает над книгой и во сне проживает тринадцать жизней: он просыпается главным героем каждого мира Хаяо Миядзаки, проходит его историю до конца и перевоплощается в следующего героя. В финале он возвращается в комнату, где на полках стоят тринадцать книг.</p>
+      <p>Все миры, персонажи и их вселенные принадлежат Хаяо Миядзаки, Studio Ghibli и правообладателям. Проект некоммерческий, не связан с правообладателями и создан из любви к этим историям. Все реплики в игре — оригинальные, а не цитаты из фильмов. Портреты персонажей — официальные кадры и изображения Studio Ghibli, а также материалы Studio Ghibli Wiki (ghibli.fandom.com), Lupin Wiki (lupin.fandom.com), кадр citaty.info для Клариссы и постер Кинопоиска для Конана и Ланы; они используются в некоммерческом фанатском проекте, а права на них принадлежат Studio Ghibli и правообладателям. Иллюстрации юного героя и пожилой пары предоставлены автором проекта.</p>
+      <p>Музыка в игре — оригинальные процедурные темы, вдохновлённые настроением каждого мира. Это не записи из аниме и не их фрагменты: каждая тема синтезируется прямо в браузере. Так проект остаётся полностью офлайн-совместимым и не использует чужие аудиозаписи.</p>
+      <p>Фон главного меню — коллаж, найденный в открытом доступе. Финальный кадр — фанатская иллюстрация, найденная в открытом доступе. Фоны тринадцати миров — официальные кадры, пейзажи и фоновые рисунки из фильмов Studio Ghibli, используемые в некоммерческом фанатском проекте. Права на изображённых персонажей и исходные материалы принадлежат их правообладателям.</p>
+      <p>В игре нет проигрыша в привычном смысле: ваши решения меняют оттенок финала. Каждый мир рассчитан примерно на 15 минут спокойного прохождения с выборами, искрой и переходом. Иногда стоит остановиться и прислушаться: в каждом мире спрятаны осколки чужой памяти.</p>
+      <p class="about-tip">Управление: клик или пробел — продолжить; «Журнал» — история реплик; «Авто» — авточтение. Музыка и шум ветра синтезируются прямо в браузере. Кнопка «Голос» включает озвучку реплик системным речевым движком вашего устройства — тембр и темп у каждого героя свои.</p>
+      <p class="about-small">Создано как интерактивный подарок. Сохраняется автоматически в вашем браузере.</p>
+    </div>
+  </div>
+</div>
+
+<div id="pause-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Пауза">
+  <div class="modal-card pause-card">
+    <div class="modal-head">
+      <h3>Пауза</h3>
+      <button class="icon-btn" data-close="pause-modal" type="button" aria-label="Закрыть">✕</button>
+    </div>
+    <div class="pause-menu">
+      <button class="menu-btn primary" data-close="pause-modal" type="button">Продолжить</button>
+      <button id="btn-pause-atlas" class="menu-btn" type="button">Атлас миров</button>
+      <button id="btn-pause-about" class="menu-btn" type="button">Об игре</button>
+      <button id="btn-pause-title" class="menu-btn" type="button">В главное меню</button>
+    </div>
+    <p class="pause-note">Прогресс сохраняется автоматически.</p>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="bg.js"></script>
+<script src="chars.js"></script>
+<script src="story4.js"></script>
+<script src="dream1.js"></script>
+<script src="dream2.js"></script>
+<script src="dream3.js"></script>
+<script src="echoes.js"></script>
+<script src="echoes2.js"></script>
+<script src="engine.js"></script>
+<script>
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0 && !/[?&]nosw=1/.test(location.search)) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
