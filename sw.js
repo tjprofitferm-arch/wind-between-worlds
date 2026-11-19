@@ -1,5 +1,5 @@
 /* Ветер между мирами — офлайн-кэш PWA */
-const CACHE = 'vmw-v27';
+const CACHE = 'vmw-v28';
 const CORE = [
   './',
   './index.html',
