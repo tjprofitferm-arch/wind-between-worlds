@@ -37,7 +37,7 @@
     satsuki: 'assets/char/cut/satsuki.webp',
     mei: 'assets/char/cut/mei.webp',
     totoro: 'assets/char/cut/totoro_v2.webp',
-    kiki: 'assets/char/cut/kiki_v18.webp',
+    kiki: 'assets/char/cut/kiki_v20.webp',
     jiji: 'assets/char/cut/jiji_v2.webp',
     porco: 'assets/char/cut/porco.webp',
     fio: 'assets/char/cut/fio.webp',
@@ -165,7 +165,7 @@
 
   /* Полноростные вырезки приподнимаем над диалоговым окном, чтобы не терять
      ступни и подол. На узких экранах окно и так ниже персонажа. */
-  var PHOTO_LIFT = { pazu: 1, ashitaka: 1, totoro: 1, jiji: 1 };
+  var PHOTO_LIFT = { pazu: 1, ashitaka: 1, totoro: 1, jiji: 1, kiki: 1 };
 
   function photoPortrait(id, mood) {
     var group = moodGroup(mood);

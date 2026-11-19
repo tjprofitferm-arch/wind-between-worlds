@@ -1,5 +1,5 @@
 /* Ветер между мирами — офлайн-кэш PWA */
-const CACHE = 'vmw-v26';
+const CACHE = 'vmw-v27';
 const CORE = [
   './',
   './index.html',
@@ -47,7 +47,7 @@ const CORE = [
   './assets/char/cut/howl_v5.webp',
   './assets/char/cut/jiji_v2.webp',
   './assets/char/cut/jiro.webp',
-  './assets/char/cut/kiki_v18.webp',
+  './assets/char/cut/kiki_v20.webp',
   './assets/char/cut/lana_v4.webp',
   './assets/char/cut/lupin_v2.webp',
   './assets/char/cut/mahito_v2.webp',
