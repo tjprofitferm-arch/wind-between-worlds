@@ -218,6 +218,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* Настоящие вырезки: без прямоугольного фона, маски и тёмной плашки. */
 .portrait-photo.cut{
   inset:0;
+  bottom:var(--plift,0px);
   display:flex;align-items:flex-end;justify-content:center;
   -webkit-mask-image:none;mask-image:none;
   background:none;
@@ -702,6 +703,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .toast.show{opacity:1;transform:translate(-50%,0)}
 
 /* ============ АДАПТИВ ============ */
+@media (max-width:760px){.portrait-photo.cut{--plift:0px !important}}
 @media (max-width:720px){
   .title-content{padding-top:calc(30px + var(--safe-t));justify-content:flex-end;padding-bottom:calc(92px + var(--safe-b))}
   .title-art{object-position:52% 44%;filter:saturate(.9) brightness(.76) contrast(1.04)}

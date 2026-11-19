@@ -32,54 +32,54 @@
     clarisse: 'assets/char/cut/clarisse_v12.webp',
     nausicaa: 'assets/char/cut/nausicaa.webp',
     asbel: 'assets/char/cut/asbel.webp',
-    pazu: 'assets/char/cut/pazu.webp',
+    pazu: 'assets/char/cut/pazu_v2.webp',
     sheeta: 'assets/char/cut/sheeta.webp',
     satsuki: 'assets/char/cut/satsuki.webp',
     mei: 'assets/char/cut/mei.webp',
-    totoro: 'assets/char/cut/totoro.webp',
+    totoro: 'assets/char/cut/totoro_v2.webp',
     kiki: 'assets/char/cut/kiki_v18.webp',
-    jiji: 'assets/char/cut/jiji.webp',
+    jiji: 'assets/char/cut/jiji_v2.webp',
     porco: 'assets/char/cut/porco.webp',
     fio: 'assets/char/cut/fio.webp',
     san: 'assets/char/cut/san.webp',
-    ashitaka: 'assets/char/cut/ashitaka.webp',
+    ashitaka: 'assets/char/cut/ashitaka_v2.webp',
     chihiro: 'assets/char/cut/chihiro.webp',
     haku: 'assets/char/cut/haku.webp',
     sophie: 'assets/char/cut/sophie_pad.webp',
-    howl: 'assets/char/cut/howl_pad.webp',
+    howl: 'assets/char/cut/howl_v5.webp',
     calcifer: 'assets/char/cut/calcifer.webp',
     sosuke: 'assets/char/cut/sosuke.webp',
     ponyo: 'assets/char/cut/ponyo.webp',
     jiro: 'assets/char/cut/jiro.webp',
     nahoko: 'assets/char/cut/nahoko.webp',
-    mahito: 'assets/char/cut/mahito.webp',
-    heron: 'assets/char/cut/heron.webp',
+    mahito: 'assets/char/cut/mahito_v2.webp',
+    heron: 'assets/char/cut/heron_v2.webp',
     eboshi: 'assets/char/cut/eboshi.webp',
-    yubaba: 'assets/char/cut/yubaba.webp',
-    dola: 'assets/char/cut/dola.webp',
+    yubaba: 'assets/char/cut/yubaba_v2.webp',
+    dola: 'assets/char/cut/dola_v3.webp',
     dreamer: 'assets/char/cut/dreamer_young.webp',
     couple: 'assets/char/cut/couple_v3.webp'
   };
   var PHOTO_FOCUS = {
     conan: '50% 50%', lana: '50% 30%', lupin: '50% 50%', clarisse: '50% 30%',
-    nausicaa: '50% 22%', asbel: '50% 22%', pazu: '50% 20%', sheeta: '50% 18%',
+    nausicaa: '50% 22%', asbel: '50% 22%', pazu: '50% 30%', sheeta: '50% 18%',
     satsuki: '50% 22%', mei: '50% 20%', totoro: '50% 30%', kiki: '50% 50%',
-    jiji: '50% 28%', porco: '50% 30%', fio: '50% 22%', san: '50% 18%',
-    ashitaka: '50% 18%', chihiro: '50% 20%', haku: '50% 18%', sophie: '50% 30%',
-    howl: '50% 35%', calcifer: '50% 50%', sosuke: '50% 22%', ponyo: '50% 32%',
-    jiro: '50% 18%', nahoko: '50% 20%', mahito: '50% 18%', heron: '50% 28%',
-    eboshi: '50% 18%', yubaba: '50% 22%', dola: '50% 20%',
+    jiji: '50% 35%', porco: '50% 30%', fio: '50% 22%', san: '50% 18%',
+    ashitaka: '50% 25%', chihiro: '50% 20%', haku: '50% 18%', sophie: '50% 30%',
+    howl: '50% 30%', calcifer: '50% 50%', sosuke: '50% 22%', ponyo: '50% 32%',
+    jiro: '50% 18%', nahoko: '50% 20%', mahito: '50% 25%', heron: '50% 35%',
+    eboshi: '50% 18%', yubaba: '50% 35%', dola: '50% 30%',
     dreamer: '50% 30%', couple: '50% 30%'
   };
   /* Масштаб контейнера вырезки: contain не режет силуэт, а zoom возвращает
      портретам прежнюю высоту. Для широких кадров масштаб ограничен, чтобы
      весь персонаж/пузырь оставался в кадре. */
   var PHOTO_ZOOM = {
-    clarisse: 0.9, yubaba: 1.16, dola: 1.08, ponyo: 1.14, heron: 1.1,
-    mahito: 1.1, porco: 1.1, mei: 1.15, calcifer: 1.15, conan: 1.0,
-    totoro: 1.08, howl: 1.0, sophie: 1.0, haku: 1.22, fio: 1.22,
-    sheeta: 1.16, ashitaka: 1.06, kiki: 1.0, pazu: 1.02, asbel: 1.02,
-    lana: 1.2, lupin: 1.0, jiji: 0.42,
+    clarisse: 0.9, yubaba: 0.98, dola: 1.2, ponyo: 1.14, heron: 1.05,
+    mahito: 1.04, porco: 1.1, mei: 1.15, calcifer: 1.15, conan: 1.0,
+    totoro: 1.0, howl: 1.04, sophie: 1.0, haku: 1.22, fio: 1.22,
+    sheeta: 1.16, ashitaka: 1.0, kiki: 1.0, pazu: 1.0, asbel: 1.02,
+    lana: 1.2, lupin: 1.0, jiji: 0.72,
     jiro: 1.02, sosuke: 1.02, nausicaa: 1.02, nahoko: 1.02, eboshi: 1.02,
     dreamer: 1.0, couple: 1.0
   };
@@ -163,15 +163,20 @@
     return 'neutral';
   }
 
+  /* Полноростные вырезки приподнимаем над диалоговым окном, чтобы не терять
+     ступни и подол. На узких экранах окно и так ниже персонажа. */
+  var PHOTO_LIFT = { pazu: 1, ashitaka: 1, totoro: 1, jiji: 1 };
+
   function photoPortrait(id, mood) {
     var group = moodGroup(mood);
     var alt = USE_PHOTO_MOODS && PHOTO_MOODS[id] && PHOTO_MOODS[id][group];
     var src = alt ? alt[0] : PHOTOS[id];
     var focus = alt ? alt[1] : (PHOTO_FOCUS[id] || '50% 20%');
     var zoom = PHOTO_ZOOM[id] || 1;
+    var lift = PHOTO_LIFT[id] ? ';--plift:clamp(90px,17.5vh,140px)' : '';
     var cut = ' cut';
     return '<div class="portrait-photo mood-' + mood + ' expr-' + group + cut + '" ' +
-      'data-char="' + id + '" data-mood="' + mood + '" style="--focus:' + focus + ';--pzoom:' + zoom + '">' +
+      'data-char="' + id + '" data-mood="' + mood + '" style="--focus:' + focus + ';--pzoom:' + zoom + lift + '">' +
       '<img src="' + src + '" alt="" draggable="false">' +
       '<span class="expr-mark" aria-hidden="true"></span>' +
       '</div>';
@@ -903,6 +908,13 @@
       skin: '#e8c8a8', hair: '#b8b0a0', hairDark: 'rgba(0,0,0,.2)', style: 'bald',
       eye: '#5a4a3a', lash: '#3a3028', age: 'old',
       outfit: { type: 'robe', main: '#3a2a2a', accent: '#c8a050', dark: 'rgba(0,0,0,.4)' }
+    },
+    dola: {
+      name: 'Дола', source: 'Лапута', color: '#d0a8a0',
+      skin: '#e8c4a2', hair: '#d8a0a0', hairDark: 'rgba(80,40,40,.25)', style: 'braids',
+      eye: '#5a4a3a', lash: '#3a2a24', age: 'old',
+      outfit: { type: 'coat', main: '#3a5a7a', accent: '#c8a050', dark: 'rgba(0,0,0,.35)' },
+      acc: ['earring'], accColor: '#d8b860'
     },
     dreamer: {
       name: 'Сновидец', source: 'мальчик, который видит сны', color: '#cfe4d8',
